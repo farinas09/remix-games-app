@@ -1,7 +1,11 @@
+import { animated, config, useSpring } from "@react-spring/web";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link } from "@remix-run/react";
+import { Link, Outlet, useNavigation } from "@remix-run/react";
+import { useEffect, useMemo, useState } from "react";
+import { FaBars } from "react-icons/fa6";
 import { getUserId } from "~/modules/auth";
+import { GamesSearch } from "~/modules/games";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -12,23 +16,72 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Games() {
   const user = useUser();
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const [style, api] = useSpring(
+    () => ({
+      config: {
+        ...config.default,
+      },
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      api.start({
+        from: {
+          transform: "translateX(-100%)",
+        },
+        to: {
+          transform: "translateX(0%)",
+        },
+      });
+    } else {
+      api.start({
+        from: {
+          transform: "translateX(0%)",
+        },
+        to: {
+          transform: "translateX(-100%)",
+        },
+      });
+    }
+  }, [isMenuOpen, api]);
+
+  const navigation = useNavigation();
+
+  const OptimisticUI = useMemo(() => {
+    if (navigation.state !== "loading") return null;
+
+    if (navigation.location?.pathname.match(/\/games$/)) {
+      return <GamesSearch />;
+    }
+  }, [navigation.state, navigation.location?.pathname]);
 
   return (
-    <div className="flex h-full min-h-screen flex-col">
+    <div className="flex min-h-screen flex-1 flex-col">
       <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
         <h1 className="text-3xl font-bold">
           <Link to="/games">Games</Link>
         </h1>
-        <p>{user.email}</p>
-        <Form method="post" action="/logout">
-          <button
-            type="submit"
-            className="rounded bg-slate-600 px-4 py-2 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
-          >
-            Logout
-          </button>
-        </Form>
+        <button
+          className="block sm"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <FaBars className="h-8 w-8 fill-white" />
+        </button>
       </header>
+      <main className="relative flex flex-1 bg-slate-700">
+        <animated.div
+          style={style}
+          className="absolute inset-0 z-10 flex -translate-x-full flex-col bg-green-800 sm:hidden"
+        ></animated.div>
+        <div className="sm:relative sm:flex sm:w-80 sm:translate-x-0 sm:flex-col sm:border-r sm:border-yellow-500 sm:bg-green-800"></div>
+        <div className="flex flex-1">
+          {OptimisticUI ? OptimisticUI : <Outlet />}
+        </div>
+      </main>
     </div>
   );
 }
