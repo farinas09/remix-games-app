@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
-import { getUserId } from "~/session.server";
+import { getUserId } from "~/modules/auth";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

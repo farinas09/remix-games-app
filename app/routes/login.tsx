@@ -8,7 +8,7 @@ import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 import { verifyLogin } from "~/modules/user";
-import { createUserSession, getUserId } from "~/session.server";
+import { createUserSession, getUserId } from "~/modules/auth";
 import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
