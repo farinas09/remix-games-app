@@ -4,8 +4,9 @@ import { json, redirect } from "@remix-run/node";
 import { Link, Outlet, useNavigation } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { FaBars } from "react-icons/fa6";
+
 import { getUserId } from "~/modules/auth";
-import { GameDetailsView, GamesSearch } from "~/modules/games";
+import { GameDetailsView, GameSearch } from "~/modules/games";
 import SideNav from "~/modules/games/components/SideNav";
 import { useUser } from "~/utils";
 
@@ -56,7 +57,7 @@ export default function Games() {
     if (navigation.state !== "loading") return null;
 
     if (navigation.location?.pathname.match(/\/games$/)) {
-      return <GamesSearch />;
+      return <GameSearch />;
     }
     if (navigation.location?.pathname.match(/\/games\/\d+$/)) {
       return <GameDetailsView />;

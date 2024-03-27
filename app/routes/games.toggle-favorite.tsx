@@ -1,4 +1,5 @@
 import { json, type ActionFunctionArgs } from "@remix-run/node";
+
 import { getUserId } from "~/modules/auth";
 import { addOrRemoveGameFromFavorites, getGameDetails } from "~/modules/games";
 

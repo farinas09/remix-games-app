@@ -1,6 +1,8 @@
 import type { Favorite, Prisma } from "@prisma/client";
+
 import { prisma } from "~/db.server";
 import type { RawgListResponse } from "~/types";
+
 import type { Game, GameDetails } from "./types";
 
 export async function searchForGames(

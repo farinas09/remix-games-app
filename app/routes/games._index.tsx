@@ -1,9 +1,10 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useNavigation } from "@remix-run/react";
+
 import { getUserId } from "~/modules/auth";
 import type { Game } from "~/modules/games";
-import { GamesSearch } from "~/modules/games/components/";
+import { GameSearch } from "~/modules/games/components/";
 import { searchForGames, getFavorites } from "~/modules/games/games.server";
 import type { RawgListResponse } from "~/types";
 
@@ -40,7 +41,7 @@ export default function GamesPage() {
   const { searchTerm, games, favorites } = useLoaderData<typeof loader>() || {};
 
   return (
-    <GamesSearch
+    <GameSearch
       searchTerm={searchTerm}
       games={games}
       navigationState={navigation.state}

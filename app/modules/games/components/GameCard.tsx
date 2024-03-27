@@ -1,15 +1,15 @@
 import { Link, useFetcher } from "@remix-run/react";
 import { useCallback, useRef } from "react";
-import { twMerge } from "tailwind-merge";
-import type { Game } from "../types";
 import { FaRegHeart, FaHeart, FaArrowRight } from "react-icons/fa6";
+
+import type { Game } from "../types";
 
 interface GameCardProps {
   game: Game;
   favorite?: boolean;
 }
 
-export const GameCard: React.FC<GameCardProps> = ({ game, favorite }) => {
+export default function GameCard({ game, favorite }: GameCardProps) {
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -29,14 +29,14 @@ export const GameCard: React.FC<GameCardProps> = ({ game, favorite }) => {
 
   return (
     <div className="relative flex min-h-[420px] w-90 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md p-6">
-      {fetcher.state !== "idle" && (
+      {fetcher.state !== "idle" ? (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-slate-600" />
             <span className="text-slate-400">Loading...</span>
           </div>
         </div>
-      )}
+      ) : null}
       {game.background_image ? (
         <div className="h-52 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
           <img
@@ -60,10 +60,12 @@ export const GameCard: React.FC<GameCardProps> = ({ game, favorite }) => {
             {game.name}
           </h5>
           <h4 className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-            {game.released && dateFormatter.format(new Date(game.released))}
+            {game.released
+              ? dateFormatter.format(new Date(game.released))
+              : null}
           </h4>
         </div>
-        <div className="">
+        <div>
           <fetcher.Form
             ref={formRef}
             method="post"
@@ -117,4 +119,4 @@ export const GameCard: React.FC<GameCardProps> = ({ game, favorite }) => {
       </div>
     </div>
   );
-};
+}

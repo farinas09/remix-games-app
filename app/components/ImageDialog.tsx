@@ -5,7 +5,7 @@ interface ImageDialogProps {
   image: string;
 }
 
-export const ImageDialog: React.FC<ImageDialogProps> = ({ image }) => {
+export default function ImageDialog({ image }: ImageDialogProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -25,4 +25,4 @@ export const ImageDialog: React.FC<ImageDialogProps> = ({ image }) => {
       </Dialog.Portal>
     </Dialog.Root>
   );
-};
+}

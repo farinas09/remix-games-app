@@ -1,9 +1,9 @@
 import { json, redirect, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+
 import { getUserId } from "~/modules/auth";
 import {
   GameDetailsView,
-  //GameDetailsView,
   getGameDetails,
   getGameScreenshots,
 } from "~/modules/games";

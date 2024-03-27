@@ -1,4 +1,4 @@
-export type Game = {
+export interface Game {
   id: number;
   slug: string;
   name: string;
@@ -45,9 +45,9 @@ export type Game = {
       recommended: string;
     };
   }[];
-};
+}
 
-export type GameDetails = {
+export interface GameDetails {
   id: number;
   slug: string;
   name: string;
@@ -127,4 +127,4 @@ export type GameDetails = {
     };
   }[];
   dominant_color?: string;
-};
+}

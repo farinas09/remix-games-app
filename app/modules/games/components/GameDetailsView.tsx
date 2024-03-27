@@ -1,19 +1,23 @@
+import {
+  ImageDialog,
+  SectionHeader,
+  TagItem,
+  RatingDetail,
+} from "~/components";
+
 import type { GameDetails as GameDetailsType } from "../types";
-import { ImageDialog } from "~/components";
-import GameHeader from "./GameHeader";
-import SectionHeader from "~/components/SectionHeader";
-import TagItem from "~/components/TagItem";
-import RatingDetail from "~/components/RatingDetail";
+
+import { GameHeader } from "./index";
 
 interface GameDetailsViewProps {
   gameDetails?: GameDetailsType | null;
   screenshots?: string[] | null;
 }
 
-export const GameDetailsView: React.FC<GameDetailsViewProps> = ({
+export default function GameDetailsView({
   gameDetails,
   screenshots,
-}) => {
+}: GameDetailsViewProps) {
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -79,4 +83,4 @@ export const GameDetailsView: React.FC<GameDetailsViewProps> = ({
       </div>
     )
   );
-};
+}

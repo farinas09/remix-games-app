@@ -1,11 +1,13 @@
+import { Favorite } from "@prisma/client";
 import * as ReactForm from "@radix-ui/react-form";
 import { Form, Link } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+
 import type { RawgListResponse } from "~/types";
+
 import type { Game } from "../types";
-import { GameCard } from "./GameCard";
-import { Favorite } from "@prisma/client";
+
+import { GameCard } from "./index";
 
 interface GamesSearchProps {
   navigationState?: "idle" | "loading" | "submitting";
@@ -14,12 +16,12 @@ interface GamesSearchProps {
   favorites?: Favorite[] | null;
 }
 
-export const GamesSearch: React.FC<GamesSearchProps> = ({
+export default function GameSearch({
   navigationState,
   searchTerm,
   favorites,
   games,
-}) => {
+}: GamesSearchProps) {
   return (
     <div className="flex flex-1 flex-col p-6 lg:py-3">
       <div className="flex flex-col lg:mb-6 lg:flex-row lg:items-center lg:justify-between">
@@ -47,15 +49,12 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
         </Form>
       </div>
       <div className="mt-4 flex flex-1 flex-col">
-        {searchTerm && (
-          <h2 className="mb-8 text-center text-xl font-bold text-white sm:text-left sm:text-4xl">
-            Showing results for "{searchTerm}"
-          </h2>
-        )}
+        {searchTerm ? <h2 className="mb-8 text-center text-xl font-bold text-white sm:text-left sm:text-4xl">
+            Showing results for {searchTerm}
+          </h2> : null}
         <div className="flex flex-wrap gap-10 items-center justify-center">
           {games &&
-            games?.results?.length > 0 &&
-            games.results.map((game) => (
+            games?.results?.length > 0 ? games.results.map((game) => (
               <GameCard
                 key={game.id}
                 game={game}
@@ -63,7 +62,7 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
                   !!favorites?.find((favorite) => favorite.gameId === game.id)
                 }
               />
-            ))}
+            )) : null}
         </div>
       </div>
       <div className="flex w-full items-center justify-between self-end">
@@ -94,4 +93,4 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
       </div>
     </div>
   );
-};
+}
