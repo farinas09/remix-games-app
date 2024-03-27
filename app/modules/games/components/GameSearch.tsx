@@ -5,18 +5,19 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import type { RawgListResponse } from "~/types";
 import type { Game } from "../types";
 import { GameCard } from "./GameCard";
+import { Favorite } from "@prisma/client";
 
 interface GamesSearchProps {
   navigationState?: "idle" | "loading" | "submitting";
   searchTerm?: string | null;
   games?: RawgListResponse<Game> | null;
-  //favorites?: Favorite[] | null;
+  favorites?: Favorite[] | null;
 }
 
 export const GamesSearch: React.FC<GamesSearchProps> = ({
   navigationState,
   searchTerm,
-  //favorites,
+  favorites,
   games,
 }) => {
   return (
@@ -55,7 +56,13 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
           {games &&
             games?.results?.length > 0 &&
             games.results.map((game) => (
-              <GameCard key={game.id} game={game} favorite={false} />
+              <GameCard
+                key={game.id}
+                game={game}
+                favorite={
+                  !!favorites?.find((favorite) => favorite.gameId === game.id)
+                }
+              />
             ))}
         </div>
       </div>
