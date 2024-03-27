@@ -5,7 +5,7 @@ import { Link, Outlet, useNavigation } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { getUserId } from "~/modules/auth";
-import { GamesSearch } from "~/modules/games";
+import { GameDetailsView, GamesSearch } from "~/modules/games";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -57,6 +57,9 @@ export default function Games() {
     if (navigation.location?.pathname.match(/\/games$/)) {
       return <GamesSearch />;
     }
+    if (navigation.location?.pathname.match(/\/games\/\d+$/)) {
+      return <GameDetailsView />;
+    }
   }, [navigation.state, navigation.location?.pathname]);
 
   return (
@@ -66,13 +69,13 @@ export default function Games() {
           <Link to="/games">Games</Link>
         </h1>
         <button
-          className="block sm"
+          className="block sm:hidden"
           onClick={() => setIsMenuOpen((current) => !current)}
         >
           <FaBars className="h-8 w-8 fill-white" />
         </button>
       </header>
-      <main className="relative flex flex-1 bg-slate-700">
+      <main className="relative flex flex-1 bg-primary dark:bg-primary-dark">
         <animated.div
           style={style}
           className="absolute inset-0 z-10 flex -translate-x-full flex-col bg-green-800 sm:hidden"
