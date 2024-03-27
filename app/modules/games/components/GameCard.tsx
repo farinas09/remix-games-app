@@ -37,7 +37,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, favorite }) => {
     //   </div>
     // )}
 
-    <div className="relative flex min-h-[420px] w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md p-6">
+    <div className="relative flex min-h-[420px] w-90 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md p-6">
       {game.background_image ? (
         <div className="h-52 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
           <img

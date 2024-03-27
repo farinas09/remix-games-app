@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { getUserId } from "~/modules/auth";
 import { GameDetailsView, GamesSearch } from "~/modules/games";
+import SideNav from "~/modules/games/components/SideNav";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -78,9 +79,13 @@ export default function Games() {
       <main className="relative flex flex-1 bg-primary dark:bg-primary-dark">
         <animated.div
           style={style}
-          className="absolute inset-0 z-10 flex -translate-x-full flex-col bg-green-800 sm:hidden"
-        ></animated.div>
-        <div className="sm:relative sm:flex sm:w-80 sm:translate-x-0 sm:flex-col sm:border-r sm:border-yellow-500 sm:bg-green-800"></div>
+          className="absolute inset-0 z-10 flex -translate-x-full flex-col sm:hidden "
+        >
+          <SideNav user={user} onItemClick={() => setIsMenuOpen(false)} />
+        </animated.div>
+        <div className="hidden sm:relative sm:flex sm:w-80 sm:translate-x-0 sm:flex-col sm:border-r relative bg-clip-border rounded-xl w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 dark:shadow-black dark:border-none">
+          <SideNav user={user} />
+        </div>
         <div className="flex flex-1">
           {OptimisticUI ? OptimisticUI : <Outlet />}
         </div>

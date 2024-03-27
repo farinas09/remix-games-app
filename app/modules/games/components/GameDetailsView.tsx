@@ -1,4 +1,3 @@
-import { FaStar } from "react-icons/fa6";
 import type { GameDetails as GameDetailsType } from "../types";
 import { ImageDialog } from "~/components";
 import GameHeader from "./GameHeader";

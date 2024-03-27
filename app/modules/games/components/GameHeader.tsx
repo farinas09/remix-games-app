@@ -21,7 +21,7 @@ export default function GameHeader({
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
       <div className="absolute inset-0 bg-black opacity-60"></div>
-      <section className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56 relative z-10">
+      <section className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56 relative">
         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           {name}
         </h1>

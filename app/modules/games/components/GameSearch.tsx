@@ -22,28 +22,21 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
   return (
     <div className="flex flex-1 flex-col p-6 lg:py-3">
       <div className="flex flex-col lg:mb-6 lg:flex-row lg:items-center lg:justify-between">
-        <h1 className="mb-6 text-center text-3xl font-bold text-white sm:text-6xl lg:mb-0">
-          Lista de juegos
-        </h1>
         <Form
           method="get"
           action="/games?index"
-          className="mb-6 flex flex-col items-center lg:mb-0"
+          className="flex items-center max-w-md mx-auto bg-white rounded-lg"
         >
           <ReactForm.Root asChild>
-            <ReactForm.Field
-              name="search"
-              className="relative flex w-80 items-center gap-4"
-            >
-              <FaMagnifyingGlass className="absolute left-2 top-1 h-8 w-8 fill-black" />
+            <ReactForm.Field name="search" className="flex w-full items-center">
               <ReactForm.Control
-                type="text"
+                type="search"
                 placeholder="Search for a game"
                 defaultValue={searchTerm || ""}
-                className="flex-1 rounded-full border border-slate-500 py-2 pl-12 pr-4"
+                className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
               />
               <ReactForm.Submit
-                className="text-white disabled:opacity-25"
+                className="flex items-center bg-blue-500 justify-center w-12 h-12 px-4 text-white rounded-r-lg disabled:opacity-25"
                 disabled={navigationState === "submitting"}
               >
                 Go
@@ -52,10 +45,9 @@ export const GamesSearch: React.FC<GamesSearchProps> = ({
           </ReactForm.Root>
         </Form>
       </div>
-      <hr className="mb-4" />
       <div className="mt-4 flex flex-1 flex-col">
         {searchTerm && (
-          <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-left sm:text-4xl">
+          <h2 className="mb-8 text-center text-xl font-bold text-white sm:text-left sm:text-4xl">
             Showing results for "{searchTerm}"
           </h2>
         )}
