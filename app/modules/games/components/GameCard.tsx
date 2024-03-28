@@ -1,5 +1,5 @@
 import { Link, useFetcher } from "@remix-run/react";
-import { useCallback, useRef } from "react";
+import { FC, useCallback, useRef } from "react";
 import { FaRegHeart, FaHeart, FaArrowRight } from "react-icons/fa6";
 
 import type { Game } from "../types";
@@ -9,7 +9,7 @@ interface GameCardProps {
   favorite?: boolean;
 }
 
-export default function GameCard({ game, favorite }: GameCardProps) {
+export const GameCard: FC<GameCardProps> = ({ game, favorite }) => {
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -119,4 +119,4 @@ export default function GameCard({ game, favorite }: GameCardProps) {
       </div>
     </div>
   );
-}
+};

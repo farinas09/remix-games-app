@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
 interface GameHeaderProps {
@@ -7,12 +8,12 @@ interface GameHeaderProps {
   imageUrl: string;
 }
 
-export default function GameHeader({
+export const GameHeader: FC<GameHeaderProps> = ({
   imageUrl,
   name,
   releaseDate,
   website,
-}: GameHeaderProps) {
+}) => {
   return (
     <div className="relative bg-blend-multiply">
       <img
@@ -42,4 +43,4 @@ export default function GameHeader({
       </section>
     </div>
   );
-}
+};

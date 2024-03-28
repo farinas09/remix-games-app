@@ -1,5 +1,6 @@
 import type { User } from "@prisma/client";
 import { Form, Link } from "@remix-run/react";
+import { FC } from "react";
 import {
   FaArrowRightFromBracket,
   FaGamepad,
@@ -12,7 +13,7 @@ interface SideNavProps {
   user: User;
 }
 
-export default function SideNav({ user, onItemClick }: SideNavProps) {
+export const SideNav: FC<SideNavProps> = ({ user, onItemClick }) => {
   return (
     <div className="text-gray-700 dark:text-white h-full flex flex-col bg-primary-light dark:bg-primary-dark">
       <div className="mb-auto w-full ">
@@ -58,4 +59,4 @@ export default function SideNav({ user, onItemClick }: SideNavProps) {
       </nav>
     </div>
   );
-}
+};

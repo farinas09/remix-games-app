@@ -1,13 +1,13 @@
 import type { Favorite } from "@prisma/client";
 import { Link, useFetcher } from "@remix-run/react";
-import { useCallback, useRef } from "react";
+import { FC, useCallback, useRef } from "react";
 import { FaTrash } from "react-icons/fa6";
 
 interface FavoriteItemProps {
   favorite: Favorite;
 }
 
-export default function FavoriteItem({ favorite }: FavoriteItemProps) {
+export const FavoriteItem: FC<FavoriteItemProps> = ({ favorite }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const fetcher = useFetcher();
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -54,4 +54,4 @@ export default function FavoriteItem({ favorite }: FavoriteItemProps) {
       </div>
     </Link>
   );
-}
+};

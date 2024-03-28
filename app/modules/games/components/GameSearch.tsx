@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Favorite } from "@prisma/client";
 import * as ReactForm from "@radix-ui/react-form";
 import { Form, Link } from "@remix-run/react";
@@ -16,12 +17,12 @@ interface GamesSearchProps {
   favorites?: Favorite[] | null;
 }
 
-export default function GameSearch({
+export const GameSearch: FC<GamesSearchProps> = ({
   navigationState,
   searchTerm,
   favorites,
   games,
-}: GamesSearchProps) {
+}) => {
   return (
     <div className="flex flex-1 flex-col p-6 lg:py-3">
       <div className="flex flex-col lg:mb-6 lg:flex-row lg:items-center lg:justify-between">
@@ -49,20 +50,23 @@ export default function GameSearch({
         </Form>
       </div>
       <div className="mt-4 flex flex-1 flex-col">
-        {searchTerm ? <h2 className="mb-8 text-center text-xl font-bold text-white sm:text-left sm:text-4xl">
+        {searchTerm ? (
+          <h2 className="mb-8 text-center text-xl font-bold text-white sm:text-left sm:text-4xl">
             Showing results for {searchTerm}
-          </h2> : null}
+          </h2>
+        ) : null}
         <div className="flex flex-wrap gap-10 items-center justify-center">
-          {games &&
-            games?.results?.length > 0 ? games.results.map((game) => (
-              <GameCard
-                key={game.id}
-                game={game}
-                favorite={
-                  !!favorites?.find((favorite) => favorite.gameId === game.id)
-                }
-              />
-            )) : null}
+          {games && games?.results?.length > 0
+            ? games.results.map((game) => (
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  favorite={
+                    !!favorites?.find((favorite) => favorite.gameId === game.id)
+                  }
+                />
+              ))
+            : null}
         </div>
       </div>
       <div className="flex w-full items-center justify-between self-end">
@@ -93,4 +97,4 @@ export default function GameSearch({
       </div>
     </div>
   );
-}
+};

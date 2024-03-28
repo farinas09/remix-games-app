@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import {
   ImageDialog,
   SectionHeader,
@@ -14,10 +16,10 @@ interface GameDetailsViewProps {
   screenshots?: string[] | null;
 }
 
-export default function GameDetailsView({
+export const GameDetailsView: FC<GameDetailsViewProps> = ({
   gameDetails,
   screenshots,
-}: GameDetailsViewProps) {
+}) => {
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -83,4 +85,4 @@ export default function GameDetailsView({
       </div>
     )
   );
-}
+};

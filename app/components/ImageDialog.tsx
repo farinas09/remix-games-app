@@ -1,11 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { FC } from "react";
 import { FaXmark } from "react-icons/fa6";
 
 interface ImageDialogProps {
   image: string;
 }
 
-export default function ImageDialog({ image }: ImageDialogProps) {
+export const ImageDialog: FC<ImageDialogProps> = ({ image }) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -25,4 +26,4 @@ export default function ImageDialog({ image }: ImageDialogProps) {
       </Dialog.Portal>
     </Dialog.Root>
   );
-}
+};
